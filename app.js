@@ -11,16 +11,24 @@ const express = require("express");
 
 const app = express();
 
+
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
 // 👇 Start handling routes here
+// const allRoutes = require("./routes");
+// app.use("/api", allRoutes);
+// -----> brauch ich nicht, später löschen. Weil wir haben das schon mit den
+// indexroutes abgedeckt
+
 const indexRoutes = require("./routes/index.routes");
-app.use("/api", indexRoutes);
+app.use("/", indexRoutes); 
+
+const authRouter = require("./routes/auth.routes");     
+app.use("/auth", authRouter); 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
 module.exports = app;
 
-// for the commit 
