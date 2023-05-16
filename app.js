@@ -33,6 +33,9 @@ app.use("/", memoryRouter)
 const contentRouter = require("./routes/content.routes");
 app.use("/", contentRouter);
 
+/* const addMemoryRouter = require("./routes/addmemory.routes");
+app.use("/", addMemoryRouter) */
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

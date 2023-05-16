@@ -4,8 +4,9 @@ const { Schema, model } = require("mongoose");
 const memorySchema = new Schema(
   {
       title: String,
+      description: String,
       category: String,
-      content: [{ type: Schema.Types.ObjectId, ref: "Content"}] 
+      // content: [{ type: Schema.Types.ObjectId, ref: "Content"}] 
     },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
