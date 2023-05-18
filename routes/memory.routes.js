@@ -1,18 +1,24 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
 
-const Content = require("../models/Content.model")
 const Memory = require("../models/Memory.model");
+const fileUploader = require("../config/cloudinary.config")
 
 // POST /memory - creates a new entry in the memory
-router.post("/memory", (req, res, next) => {
-    const { title, description, category } = req.body;
+router.post("/memory", fileUploader.single("imageUrl"), (req, res, next) => {
+    const { title, category, description, usefulFor, link, video, imageUrl } = req.body;
     
-    Memory.create({ title, description, category })
+    Memory.create( req.body )
         .then(response => res.json(response))
-        // .then((response) => res.redirect("/memory"))
         .catch(err => res.json(err));
 })
+
+// POST /upload - route that receives the image and sends it to Cloudinary via fileUploader 
+//                and return the image URL
+router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+    res.json({ fileUrl: req.file.path })
+})
+
 
 // GET /memory - retrieves all of the entries in the memory
 router.get("/memory", (req, res, next) => {

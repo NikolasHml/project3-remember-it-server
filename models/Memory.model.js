@@ -3,13 +3,22 @@ const { Schema, model } = require("mongoose");
 
 const memorySchema = new Schema(
   {
-      title: String,
+      title: {
+        type: String,
+        required: true,
+      },
+      category: {
+        type: String,
+        required: true,
+      },
       description: String,
-      category: String,
-      // content: [{ type: Schema.Types.ObjectId, ref: "Content"}] 
+      usefulFor: String,
+      link: String,
+      video: String,
+      imageUrl: String,
     },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+    // adding extra properties: `createdAt` and `updatedAt`    
     timestamps: true
   }
 );
